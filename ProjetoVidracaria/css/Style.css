@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
+}
+body{
+    overflow-x: hidden
 }
 
 .content-superior {
@@ -71,7 +73,111 @@
     font-weight: bold;
     margin-bottom: 25px;
 }
+#btn-content2 {
+    text-align: center;
+    width: 100%;
+    height: 80px;
+    padding-bottom: 45px;
+    font-size: 2.3rem;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 25px;
+    animation: fadeInUp 1s ease-in-out;
+}
+.cont-titulo{
+    font-size: 2.5rem;
+    text-align: center;
+    padding-top: 50px;
+    font-weight: bold;
+    animation: fadeIn 2s ease-in-out;
+}
+.cont-corpo{
+    font-size: 1.9rem;
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+}
 
+.service, .depoimentos{
+    background-color: #C6AFB1;
+}
+.card{
+    border: none;
+    text-align: center;
+    width: 90%;
+    height: auto;
+    padding: 10px;
+    margin: 0 auto;
+}
+.img1{
+    width: 100%;
+    height: 575px;
+    object-fit: cover;
+}
+.card-title{
+    margin-left: 15px;
+    text-align: start;
+    font-size: 2.5rem;
+    margin-top: 15px;
+    font-weight: bold;
+}
+.card-title1{
+    margin-left: 15px;
+    text-align: start;
+    font-size: 2.3rem;
+    margin-top: 15px;
+    font-weight: bold;
+}
+.card-body{
+
+    text-align: start;
+    font-size: 1.7rem;
+    
+}
+.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out; /* Define a suavidade */
+}   
+.show{
+    opacity: 1;
+    transform: translateY(0);
+}
+.quem-somos{
+    height: calc(100vh - 100px);
+}
+.content2-body{
+    text-align: justify;
+    font-size: 1.4rem;
+}
+.depoimentos h5{
+    
+    text-align: center;
+    font-size: 2.6rem;
+}
+.cards-container{
+    max-width: 1800px;
+    gap: 70px;
+}
+.fa-star{
+    color: yellow;
+    
+}
+@keyframes fadeIn{
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+@keyframes fadeInUp{
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    } to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 @media (max-width: 567px) {
     .navbar .navbar-brand {
         font-size: 1.2rem;
@@ -85,4 +191,13 @@
     .foto1{
         margin-bottom: 50px;
     }
+    #btn-content2 {
+    height: 50px;
+    font-size: 1.7rem;
+    color: white;
+    font-weight: bold;
+}
+.card{
+    margin-top: 15px;
+}
 }
