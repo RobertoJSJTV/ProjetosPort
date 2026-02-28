@@ -154,13 +154,32 @@ body{
     text-align: center;
     font-size: 2.6rem;
 }
-.cards-container{
-    max-width: 1800px;
+.depoimentos .cards-container{
+    width: 100%;
+    height: auto;
     gap: 70px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+.depoimentos .card{
+    margin-top: 50px;
+    width: 300px;
+    min-width: 300px;
+    overflow: hidden;
+    padding: 20px;
 }
 .fa-star{
-    color: yellow;
-    
+    color: rgb(254, 254, 27);   
+}
+.pessoa{
+    padding-top: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+   
+}
+.depoimentos .card p{
+    padding-top: 20px;
+    font-size: 1.2rem;
 }
 @keyframes fadeIn{
     from {
