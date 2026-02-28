@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <script src="principalPage/js/script.js"></script>
+    <title>Sub Projects</title>
+</head>
+
+<body>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url(../img/outerspace-58.gif) no-repeat center center fixed;
+    background-size: 100%;
+}
+
+.back {
+    background: #3941a0;
+}
+
+.title {
+    cursor: pointer;
+    background: #3941a0;
+}
+
+.nav-link:hover {
+    background: #2c2f7a;
+
+}
+
+.nav-link a:hover {
+    color: black;
+}
+
+.titulo {
+    text-align: center;
+    color: yellow;
+    margin-top: 80px;
+    text-shadow: 2px 2px black;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 10%;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.card {
+    border-radius: 12px;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid rgb(57, 65, 160);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.card-imagem {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.card h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+.card p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+.card .lingua {
+    display: inline-block;
+    margin-top: 1px;
+    border: 1px solid black;
+    color: #3941a0;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 0.7em;
+}
+
+.card a {
+    display: block;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px 10px;
+    background-color: #3941a0;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.card a:hover {
+    background-color: #292f6e;
+}
+
+.card a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 790px) {
+    body {
+        background: url(../img/outerspace-58.gif) no-repeat center center fixed;
+        background-size: cover;
+    }
+}
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-light back">
+        <div class="container back">
+            <h3 class="navbar-brand text-white title">Sub Projects</h3>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-target"
+                aria-controls="nav-target" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="nav-target">
+                <ul class="navbar-nav ms-auto">
+                    <li class="navbar-item"><a class="nav-link text-white"
+                            href="https://robertojsjtv.github.io/Portifolio/" id="resume">Resume</a></li>
+                    <li class="navbar-item"><a class="nav-link text-white" href="index.html"
+                            rel="noopener noreferrer" id="social-medias">Social Medias</a></li>
+
+                    <select class="form" onchange="idioma(this)">
+                        <option value="">Select Language</option>
+                        <option value="en">English</option>
+                        <option value="pt">Portuguese</option>
+                    </select>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h2 class="titulo">projects</h2>
+        <div class="cards-container">
+            <div class="card">
+                <img class="card-imagem" src="principalPage/img/Vidracaria.png" alt="project Vidraçaria Vridos">
+                <h3 id="imc">Project Vidraçaria Vridos</h3>
+                <p id="imc-tex">the project it's a case to learn and train javascript, and using at the cotidian.</p>
+                <p class="lingua">html 5</p>
+                <p class="lingua">css</p>
+                <p class="lingua">javascript</p>
+                <p class="lingua">bootstrap</p>
+                <a href="https://robertojsjtv.github.io/ProjetosPort/ProjetoVidracaria/vidracaria.html" target="_blank" rel="noopener noreferrer"
+                    id="vrido-link">Learn more
+                </a>
+            </div>
+            <!-- <div class="card">
+                <img class="card-imagem" src="principalPage/img/financaFacil.png" alt="project Finança Fácil">
+                <h3 id="proj-finans">Project Finança Fácil</h3>
+                <p id="proj-finans-tex">the project it's a case to learn and train javascript, and using at the
+                    cotidian.</p>
+                <p class="lingua">html 5</p>
+                <p class="lingua">css</p>
+                <p class="lingua">javascript</p>
+                <p class="lingua">bootstrap</p>
+                <a href="financas.html" target="_blank" rel="noopener noreferrer" id="finans-link">Learn more
+                </a>
+            </div> -->
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
