@@ -4,7 +4,8 @@
     box-sizing: border-box;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-body{
+
+body {
     overflow-x: hidden
 }
 
@@ -73,6 +74,7 @@ body{
     font-weight: bold;
     margin-bottom: 25px;
 }
+
 #btn-content2 {
     text-align: center;
     width: 100%;
@@ -84,23 +86,27 @@ body{
     margin-bottom: 25px;
     animation: fadeInUp 1s ease-in-out;
 }
-.cont-titulo{
+
+.cont-titulo {
     font-size: 2.5rem;
     text-align: center;
     padding-top: 50px;
     font-weight: bold;
     animation: fadeIn 2s ease-in-out;
 }
-.cont-corpo{
+
+.cont-corpo {
     font-size: 1.9rem;
     text-align: center;
     animation: fadeIn 2s ease-in-out;
 }
 
-.service, .depoimentos{
+.service,
+.depoimentos {
     background-color: #C6AFB1;
 }
-.card{
+
+.card {
     border: none;
     text-align: center;
     width: 90%;
@@ -108,115 +114,242 @@ body{
     padding: 10px;
     margin: 0 auto;
 }
-.img1{
+
+.img1 {
     width: 100%;
     height: 575px;
     object-fit: cover;
 }
-.card-title{
+
+.card-title {
     margin-left: 15px;
     text-align: start;
     font-size: 2.5rem;
     margin-top: 15px;
     font-weight: bold;
 }
-.card-title1{
+
+.card-title1 {
     margin-left: 15px;
     text-align: start;
     font-size: 2.3rem;
     margin-top: 15px;
     font-weight: bold;
 }
-.card-body{
 
+.card-body {
     text-align: start;
     font-size: 1.7rem;
-    
 }
+
 .hidden {
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.8s ease-out; /* Define a suavidade */
-}   
-.show{
+    transition: all 0.8s ease-out;
+}
+
+.show {
     opacity: 1;
     transform: translateY(0);
 }
-.quem-somos{
-    height: calc(100vh - 100px);
+
+.quem-somos {
+    padding: 60px 0 40px;
+    overflow: hidden;
 }
-.content2-body{
+
+
+.content2-body {
     text-align: justify;
     font-size: 1.4rem;
 }
-.depoimentos h5{
-    
+
+.depoimentos h5 {
+
     text-align: center;
     font-size: 2.6rem;
 }
-.depoimentos .cards-container{
+
+.depoimentos .cards-container {
     width: 100%;
     height: auto;
     gap: 70px;
     overflow-x: auto;
     padding-bottom: 20px;
 }
-.depoimentos .card{
+
+.depoimentos .card {
     margin-top: 50px;
     width: 300px;
     min-width: 300px;
     overflow: hidden;
     padding: 20px;
 }
-.fa-star{
-    color: rgb(254, 254, 27);   
+
+.fa-star {
+    color: rgb(254, 254, 27);
 }
-.pessoa{
+
+.pessoa {
     padding-top: 30px;
     font-size: 1.5rem;
     font-weight: bold;
-   
+
 }
-.depoimentos .card p{
+
+.depoimentos .card p {
     padding-top: 20px;
     font-size: 1.2rem;
 }
-@keyframes fadeIn{
+
+.contato h6 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding-top: 25px;
+}
+
+.contato .card {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    text-align: start;
+    border-radius: 0;
+    padding-left: 25px;
+    display: inline-block;
+}
+
+.contato .sub-title {
+    font-size: 1.9rem;
+    font-weight: bold;
+}
+
+.contato a {
+    font-size: 1.4rem;
+    text-decoration: none;
+    position: relative;
+}
+.contato a:hover::after{
+    width: 100%;
+}
+.contato a::after {
+    color: blue;
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: #f5c518;
+    transition: 0.3s;
+
+}
+.corpo-contato{
+    font-size: 1.4rem;
+}
+@keyframes fadeIn {
     from {
         opacity: 0;
-    } to {
+    }
+
+    to {
         opacity: 1;
     }
 }
-@keyframes fadeInUp{
+
+@keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(20px);
-    } to {
+    }
+
+    to {
         opacity: 1;
         transform: translateY(0);
     }
 }
-@media (max-width: 567px) {
+
+@media (max-width: 768px) {
+    .quem-somos {
+        padding: 40px 0 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .icone {
+        width: 65px;
+        height: 35px;
+    }
+
     .navbar .navbar-brand {
         font-size: 1.2rem;
     }
 
-    #btn-content1 {
-        font-size: 1.5rem;
-        width: 100%;
-        height: 30px;
+    .navbar .nav-link {
+        font-size: 1rem;
     }
-    .foto1{
+
+    .content-1 {
+        font-size: 2rem;
+    }
+
+    .context-body {
+        font-size: 1.2rem;
+    }
+
+    .cont-titulo {
+        font-size: 1.8rem;
+    }
+
+    .cont-corpo {
+        font-size: 1.4rem;
+    }
+
+    .card {
+        margin-top: 15px;
+        width: 90%;
+        padding: 10px 5px;
+    }
+
+    .service .card {
+        width: 100%;
+        margin: 0 auto 20px auto;
+    }
+
+    .depoimentos .carousel .card {
+        max-width: 90%;
+    }
+
+    #btn-content1 {
+        font-size: 1.3rem;
+        width: 100%;
+        height: 40px;
+        padding-bottom: 20px;
+    }
+
+    #btn-content2 {
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .foto1 {
         margin-bottom: 50px;
     }
-    #btn-content2 {
-    height: 50px;
-    font-size: 1.7rem;
-    color: white;
-    font-weight: bold;
-}
-.card{
-    margin-top: 15px;
-}
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .service,
+    .depoimentos,
+    .quem-somos {
+        padding: 20px 0;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 8%;
+    }
+    .contato a{
+        font-size: 1.3rem;
+    }
 }
