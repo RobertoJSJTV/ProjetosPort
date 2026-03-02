@@ -164,6 +164,7 @@ body {
     font-size: 1.4rem;
 }
 
+
 .depoimentos h5 {
 
     text-align: center;
@@ -228,9 +229,11 @@ body {
     text-decoration: none;
     position: relative;
 }
-.contato a:hover::after{
+
+.contato a:hover::after {
     width: 100%;
 }
+
 .contato a::after {
     color: blue;
     content: "";
@@ -243,9 +246,123 @@ body {
     transition: 0.3s;
 
 }
-.corpo-contato{
+
+.corpo-contato {
     font-size: 1.4rem;
 }
+
+.botaoFloatoante {
+    color: white;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 15px;
+    background: #00a884;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.botaoFloatoante:hover {
+    color: #000000;
+}
+
+footer img {
+    width: 100px;
+    height: 55px;
+}
+
+.footer-premium {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-premium a {
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.footer-premium a:hover {
+    color: #f5c518;
+    transform: translateX(5px);
+}
+
+.logo-footer {
+    color: #f5c518;
+    transition: 0.4s;
+}
+
+.logo-footer:hover {
+    letter-spacing: 2px;
+}
+
+.social-icons a {
+    font-size: 1.4rem;
+    color: white;
+    transition: 0.4s;
+}
+
+.social-icons a:hover {
+    color: #f5c518;
+    transform: translateY(-5px) scale(1.1);
+}
+
+.dev {
+    text-decoration: none;
+    color: yellow;
+    position: relative;
+}
+
+.dev:hover {
+    color: #f5c518;
+    font-size: 1.2rem;
+    transition: 0.5s;
+}
+
+.dev:hover::after {
+    width: 100%;
+}
+
+.dev::after {
+    color: #f5c518;
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: #f5c518;
+    border-bottom: 1px solid #f5c518;
+    transition: 0.3s;
+}
+.content2-body1 {
+    padding-left: 15px;
+    text-align: start;
+    font-size: 1.4rem;
+    font-weight: 400;
+    padding-bottom: 15px;
+    line-height: 1.6;
+    animation: fadeInUp 3s ease-in-out ;
+}
+
+.detalhes img{
+    animation: fadeInUp 3s ease-in-out;
+}
+#how-we-are{
+    animation: fadeInUp 3s ease-in-out;
+}
+
+/* Mobile ajuste */
+@media(max-width:768px) {
+    .footer-premium {
+        text-align: center;
+    }
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -349,7 +466,11 @@ body {
     .carousel-control-next {
         width: 8%;
     }
-    .contato a{
+
+    .contato a {
         font-size: 1.3rem;
+    }
+    .detalhes img{
+        display: none;
     }
 }
