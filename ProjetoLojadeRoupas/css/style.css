@@ -1,0 +1,149 @@
+:root {
+    --light-black: #0000;
+    --black: #000;
+    --white: #fff;
+
+    --tamanho-importantes: 1.8rem;
+    --tamanho-links: 1.3rem;
+
+    --font: 'Bebas';
+
+    --links-hover-cinza-claro: rgb(71, 71, 71);
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font);
+}
+
+body {
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.top {
+    width: 100%;
+    overflow: hidden;
+    /* Esconde o texto que sai da caixa */
+    white-space: nowrap;
+    background-color: var(--black)
+}
+
+.contet-superior {
+    display: inline-block;
+    color: var(--white);
+    font-weight: bold;
+    padding-left: 10px;
+    animation: superior 10s linear infinite;
+}
+
+.urban {
+    font-size: var(--tamanho-importantes);
+    text-transform: uppercase;
+
+}
+
+.navbar .nav-item {
+    font-size: var(--tamanho-links);
+}
+
+.navbar .btn {
+    font-size: var(--tamanho-links);
+}
+
+.navbar .btn:hover {
+    color: var(--links-hover-cinza-claro);
+}
+
+.informations {
+    margin-top: 45px;
+    justify-content: center;
+    text-align: center;
+    font-size: var(--tamanho-links);
+
+}
+.divisor{
+    border-right: 1px solid gray;
+}
+.titulo-informacoes{
+    font-weight: bold;
+}
+
+@keyframes superior {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-100%, 0);
+    }
+}
+
+.top:hover .contet-superior {
+    animation-play-state: paused;
+}
+
+@font-face {
+    font-family: 'Bebas', sans-serif;
+    src: url('/ProjetoLojadeRoupas/fonts/BebasNeue.woff2') format('woff2');
+}
+.footer-ultra {
+    background: #0d1117;
+    position: relative;
+    overflow: hidden;
+}
+
+.top-line {
+    height: 4px;
+    background: linear-gradient(90deg, #f5c518, #ff512f, #dd2476, #f5c518);
+    background-size: 300% 100%;
+    animation: moveGradient 6s linear infinite;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% }
+    100% { background-position: 300% }
+}
+
+.footer-ultra a {
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.footer-ultra a:hover {
+    color: #f5c518;
+    text-shadow: 0 0 8px #f5c518;
+}
+
+.brand {
+    color: white;
+    position: relative;
+    display: inline-block;
+}
+
+.brand::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    background: #f5c518;
+    bottom: -5px;
+    left: 0;
+    transition: 0.4s;
+}
+
+.brand:hover::after {
+    width: 100%;
+}
+
+/* Mobile refinado */
+@media(max-width:768px){
+    .footer-ultra {
+        text-align: center;
+    }
+}
