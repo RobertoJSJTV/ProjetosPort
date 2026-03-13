@@ -5,6 +5,8 @@
 
     --tamanho-importantes: 1.8rem;
     --tamanho-links: 1.3rem;
+    --tamanho-produtos: 1.3rem;
+    --tamanho-descricao:1.1rem;
 
     --font: 'Bebas';
 
@@ -139,6 +141,16 @@ body {
 
 .brand:hover::after {
     width: 100%;
+}
+.foo{
+    font-size: var(--tamanho-links);
+}
+.card-title{
+    font-size: var(--tamanho-produtos);
+    font-weight: bold;
+}
+.card-text{
+    font-size:var(--tamanho-descricao);
 }
 
 /* Mobile refinado */
