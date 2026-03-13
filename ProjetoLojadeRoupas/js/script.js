@@ -2,18 +2,45 @@ const SUPABASE_URL = "https://oluvqhcsqfazlxwwyxjz.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdXZxaGNzcWZhemx4d3d5eGp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDE0MTYsImV4cCI6MjA4ODk3NzQxNn0.QgRVoPmKQZ2pdLmvHWuSKKRrZzOcGfEoxcRdGRuhH8U";
 
 // CADASTRAR PRODUTO
-async function cadastrarProduto() {
+function showModal({ title, body, buttonText, buttonClass }) {
+    const modalEl = document.getElementById("modalRegistraDespesa");
+    if (!modalEl) return;
 
-    const nome = document.getElementById("nome").value;
-    const descricao = document.getElementById("descricaoProduto").value;
-    const qtd = document.getElementById("Qtd").value;
-    const valor = document.getElementById("valor").value;
-    const imgURL = document.getElementById("imgURL").value
+    const bootstrapModal = new bootstrap.Modal(modalEl);
+    document.getElementById('modalTitulo').textContent = title;
+    document.getElementById('modalTitulo').className = `modal-title ${buttonClass === 'btn-danger' ? 'text-danger' : buttonClass === 'btn-success' ? 'text-success' : ''}`;
+    document.getElementById('modalBody').innerHTML = body;
+    const botao = document.getElementById('modalBotao');
+    botao.className = `btn ${buttonClass}`;
+    botao.textContent = buttonText;
+
+    bootstrapModal.show();
+}
+
+// CADASTRAR PRODUTO
+async function cadastrarProduto() {
+    const nomeEl = document.getElementById("nome");
+    const descricaoEl = document.getElementById("descricaoProduto");
+    const qtdEl = document.getElementById("Qtd");
+    const valorEl = document.getElementById("valor");
+    const imgURLEl = document.getElementById("imgURL");
+
+    const nome = nomeEl.value;
+    const descricao = descricaoEl.value;
+    const qtd = qtdEl.value;
+    const valor = valorEl.value;
+    const imgURL = imgURLEl.value;
 
     if (!nome || !descricao || !qtd || !valor) {
-        alert("Preencha todos os campos");
+        showModal({
+            title: 'Erro ao gravar, verifique os dados informados',
+            body: '<p>Existem campos obrigatórios não preenchidos.</p>',
+            buttonText: 'Voltar e corrigir',
+            buttonClass: 'btn-danger'
+        });
         return;
     }
+
     const response = await fetch(`${SUPABASE_URL}/rest/v1/Products`, {
         method: "POST",
         headers: {
@@ -32,9 +59,25 @@ async function cadastrarProduto() {
     });
 
     if (response.ok) {
-        alert("Produto cadastrado com sucesso!");
+        showModal({
+            title: 'Registro inserido com sucesso',
+            body: '<p>O Produto foi cadastrado com sucesso.</p>',
+            buttonText: 'Voltar',
+            buttonClass: 'btn-success'
+        });
+
+        nomeEl.value = "";
+        descricaoEl.value = "";
+        qtdEl.value = "";
+        valorEl.value = "";
+        imgURLEl.value = "";
     } else {
-        alert("Erro ao cadastrar produto");
+        showModal({
+            title: 'Erro ao cadastrar produto!',
+            body: '<p>Erro desconhecido.</p>',
+            buttonText: 'Voltar e corrigir',
+            buttonClass: 'btn-danger'
+        });
     }
 }
 
@@ -46,7 +89,7 @@ async function carregarProdutos() {
 
     if (!container) return;
 
-        const response = await fetch(`${SUPABASE_URL}/rest/v1/Products?select=*`, {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/Products?select=*`, {
         method: "GET",
         headers: {
             "apikey": SUPABASE_KEY,
@@ -54,7 +97,7 @@ async function carregarProdutos() {
         }
     });
 
-    const produtos = await response.json(); 
+    const produtos = await response.json();
 
     container.innerHTML = "";
 
