@@ -147,3 +147,8 @@ body {
         text-align: center;
     }
 }
+@media (max-width: 768px) {
+    .form-control{
+        margin-top: 10px;
+    }
+}
