@@ -39,7 +39,7 @@ body {
     color: var(--white);
     font-weight: bold;
     padding-left: 10px;
-    animation: superior 10s linear infinite;
+    animation:superior 10s linear infinite;
 }
 
 .urban {
