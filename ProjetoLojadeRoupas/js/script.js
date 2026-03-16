@@ -17,6 +17,56 @@ function showModal({ title, body, buttonText, buttonClass }) {
     bootstrapModal.show();
 }
 
+//CADASTRAR USUARIO
+async function cadastroUsuario() {
+    const nome = document.getElementById("nomeUsuario");
+    const email = document.getElementById("email");
+    const senha = document.getElementById("senha");
+
+    const nomeUsuario = nome.value;
+    const emailUsuario = email.value;
+    const senhaUsuario = senha.value;
+
+    if (!nomeUsuario || !emailUsuario || !senhaUsuario) {
+        showModal({
+            title: 'Erro ao cadastrar, verifique se todos os dados estão sendo informados',
+            body: '<p>Existem campos obrigatórios não preenchidos</p>',
+            buttonText: 'Voltar e corrigir',
+            buttonClass: 'btn-danger'
+        })
+        return;
+    }
+
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/Login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`,
+            "Prefer": "return=minimal"
+        },
+        body: JSON.stringify({
+            Nome: nomeUsuario,
+            email: emailUsuario,
+            senha: senhaUsuario
+
+        })
+    });
+    if (response.ok) {
+        showModal({
+            title: 'Conta cadastrada com sucesso',
+            body: '<p>A conta foi cadastrada com sucesso.</p>',
+            buttonText: 'Voltar',
+            buttonClass: 'btn-success'
+        });
+        nome.value = "";
+        email.value = "";
+        senha.value = "";
+    } else {
+        document.innerHTML('alert') = "<div class='alert alert-danger' role='alert'><strong>danger</strong> não foi possivel salvar!</div>";
+    }
+}
+
 // CADASTRAR PRODUTO
 async function cadastrarProduto() {
     const nomeEl = document.getElementById("nome");

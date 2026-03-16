@@ -10,6 +10,8 @@
 
     --font: 'Bebas';
 
+    --link-gray: #6e6e6e;
+
     --links-hover-cinza-claro: rgb(71, 71, 71);
 
 }
@@ -152,7 +154,13 @@ body {
 .card-text{
     font-size:var(--tamanho-descricao);
 }
-
+.log{
+    text-decoration: none;
+    color: var(--link-gray);
+}
+.log:hover{
+    color: var(--links-hover-cinza-claro);
+}
 /* Mobile refinado */
 @media(max-width:768px){
     .footer-ultra {
