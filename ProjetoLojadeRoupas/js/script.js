@@ -544,10 +544,6 @@ async function carregarDetalhesProduto() {
     const urlParams = new URLSearchParams(window.location.search);
     const produtoId = urlParams.get('id');
 
-    if (!produtoId) {
-        window.location.href = 'LojaRoupas.html';
-        return;
-    }
 
     const response = await fetch(`${SUPABASE_URL}/rest/v1/Products?id=eq.${produtoId}&select=*`, {
         method: "GET",
