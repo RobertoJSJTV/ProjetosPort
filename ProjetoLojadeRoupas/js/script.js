@@ -545,7 +545,7 @@ async function carregarDetalhesProduto() {
     const produtoId = urlParams.get('id');
 
     if (!produtoId) {
-        window.location.href = 'lojaRoupas.html';
+        window.location.href = 'LojaRoupas.html';
         return;
     }
 
