@@ -167,10 +167,7 @@ body {
 }
 .log :hover{
     color: var(--link-hover-info);
-}
-#user{
-    
-}
+}   
 /* Mobile refinado */
 @media(max-width:768px){
     .footer-ultra {
