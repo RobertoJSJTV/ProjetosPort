@@ -45,9 +45,10 @@
                     <li class="nav-item"><a class="nav-link" href="LojaRoupas.html">Loja</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Produtos</a></li>
                 </ul>
-                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#modalLogin"><i
+                <a href="#" class="btn" id="loginLink" data-bs-toggle="modal" data-bs-target="#modalLogin"><i
                         class="fa-solid fa-user"></i>
                     Login/Registrar-se</a>
+
             </div>
         </div>
     </nav>
@@ -65,19 +66,20 @@
                     <form>
                         <div class="mb-3">
                             <label>Email</label>
-                            <input type="email" class="form-control">
+                            <input type="email" class="form-control" id="loginEmail">
                         </div>
                         <div class="mb-3">
                             <label>Senha</label>
-                            <input type="password" class="form-control">
+                            <input type="password" class="form-control" id="loginSenha">
                         </div>
                     </form>
-                    <a href="" class="log" data-bs-toggle="modal" data-bs-target="#modalCadastro">Não tem uma conta? Cadastre-se</a>
+                    <a href="" class="log" data-bs-toggle="modal" data-bs-target="#modalCadastro">Não tem uma conta?
+                        Cadastre-se</a>
                 </div>
 
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-warning">Entrar</button>
+                    <button class="btn btn-warning" onclick="Logar()">Entrar</button>
                 </div>
 
             </div>
@@ -108,7 +110,8 @@
                             <input type="password" class="form-control" id="senha" aria-label="Digite sua senha">
                         </div>
                     </form>
-                    <a href="" class="log" data-bs-toggle="modal" data-bs-target="#modalLogin">já tem uma conta? Acesse aqui</a>
+                    <a href="" class="log" data-bs-toggle="modal" data-bs-target="#modalLogin">já tem uma conta? Acesse
+                        aqui</a>
                 </div>
 
                 <div class="modal-footer">
@@ -119,8 +122,9 @@
             </div>
         </div>
     </div>
+    
     <section>
-        <div class="container mt-5">
+        <div id="areaAdmin" class="container mt-5">
             <div class="row">
                 <div class="col-md-3">
                     <input type="text" class="form-control" placeholder="Nome do Produto" id="nome" required>
@@ -164,10 +168,73 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>nome</th>
+                            <th>descricao</th>
+                            <th>quantidade</th>
+                            <th>Valor</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaProdutos">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEditar">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Editar Informações</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label>Nome</label>
+                            <input type="text" class="form-control" id="editNome">
+                        </div>
+                        <div class="mb-3">
+                            <label>Descrição</label>
+                            <input type="text" class="form-control" id="editDescricao">
+                        </div>
+                        <div class="mb-3">
+                            <label>Quantidade</label>
+                            <input type="number" class="form-control" id="editQtd">
+                        </div>
+                        <div class="mb-3">
+                            <label>Valor</label>
+                            <input type="text" class="form-control" id="editValor">
+                        </div>
+                        <div class="mb-3">
+                            <label>URL da Imagem</label>
+                            <input type="text" class="form-control" id="editImgURL">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" onclick="salvarProduto()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
-        body{
+        body {
             background-image: url(img/estoq.png);
-            backdrop-filter: blur(5px);    
+            backdrop-filter: blur(5px);
             background-repeat: no-repeat;
             background-size: cover;
         }
