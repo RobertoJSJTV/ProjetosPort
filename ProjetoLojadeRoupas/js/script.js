@@ -341,7 +341,7 @@ document.getElementById("btnSair").onclick = logout;
 
         showModal({
             title: 'Login realizado com sucesso',
-            body: '<p>Bem-vindo!</p>',
+            body: `<p>Bem-vindo! ${user.Nome}</p>`,
             buttonText: 'OK',
             buttonClass: 'btn-success'
         });

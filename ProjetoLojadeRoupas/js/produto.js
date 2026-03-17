@@ -1,6 +1,3 @@
-const SUPABASE_URL = "https://oluvqhcsqfazlxwwyxjz.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdXZxaGNzcWZhemx4d3d5eGp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDE0MTYsImV4cCI6MjA4ODk3NzQxNn0.QgRVoPmKQZ2pdLmvHWuSKKRrZzOcGfEoxcRdGRuhH8U";
-
 async function carregarDetalhesProduto() {
     //Pega o ID da URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -29,7 +26,7 @@ async function carregarDetalhesProduto() {
 function exibirProduto(produto) {
     const container = document.getElementById("detalhe-produto");
     container.innerHTML = `
-        <div class="col-md-6">
+        <div class="col-md-6 mb-5">
             <img src="${produto.imgURL}" class="img-fluid rounded shadow" alt="${produto.nome}">
         </div>
         <div class="col-md-6">
@@ -39,7 +36,7 @@ function exibirProduto(produto) {
             <p class="mt-4">${produto.descricao}</p>
             <p><strong>Disponível:</strong> ${produto.qtd} unidades</p>
             <hr>
-            <button class="btn btn-warning btn-lg w-100" onclick="adicionarAoCarrinho('${produto.id}')">
+            <button class="btn btn-warning btn-lg w-100 mb-5" onclick="finalizarCompra('${produto.id}')">
                 Confirmar Compra
             </button>
         </div>
