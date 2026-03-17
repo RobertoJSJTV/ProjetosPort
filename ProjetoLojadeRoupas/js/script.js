@@ -20,6 +20,10 @@ function showModal({ title, body, buttonText, buttonClass }) {
     bootstrapModal.show();
 }
 
+function validarEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
 //CADASTRAR USUARIO
 async function cadastroUsuario() {
     const nome = document.getElementById("nomeUsuario");
@@ -39,6 +43,15 @@ async function cadastroUsuario() {
         })
         return;
     }
+    if (!validarEmail(emailUsuario)) {
+    showModal({
+        title: 'Email inválido',
+        body: '<p>Digite um email válido (ex: nome@email.com).</p>',
+        buttonText: 'Corrigir',
+        buttonClass: 'btn-danger'
+    });
+    return;
+}
 
     const response = await fetch(`${SUPABASE_URL}/rest/v1/Login`, {
         method: "POST",
@@ -169,6 +182,97 @@ function aplicarPermissoes() {
         }
 }
 
+function perfil(){
+    const user = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+    const conteudo = `
+            <form id="formPerfil">
+            <div class="mb-3">
+                <label for="perfilNome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="perfilNome" value="${user.Nome}" required>
+            </div>
+            <div class="mb-3">
+                <label for="perfilEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="perfilEmail" value="${user.email}" required>
+            </div>
+            <div class="mb-3">
+                <label for="perfilSenha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="perfilSenha" placeholder="Digite nova senha">
+                <small class="text-muted">Deixe em branco para manter a senha atual</small>
+            </div>
+        </form>
+    `;
+        showModal({
+        title: 'Perfil do Usuário',
+        body: conteudo,
+        buttonText: 'Salvar',
+        buttonClass: 'btn-success'
+    });
+
+    // Adicionar evento no botão do modal
+    document.getElementById('modalBotao').onclick = atualizarPerfil;
+}
+
+async function atualizarPerfil() {
+    const user = JSON.parse(localStorage.getItem("usuarioLogado"));
+    if (!user) return;
+
+    const nome = document.getElementById("perfilNome").value.trim();
+    const email = document.getElementById("perfilEmail").value.trim();
+    const senha = document.getElementById("perfilSenha").value.trim();
+
+    if (!nome || !email) {
+        showModal({
+            title: 'Erro',
+            body: '<p>Nome e email são obrigatórios.</p>',
+            buttonText: 'Voltar',
+            buttonClass: 'btn-danger'
+        });
+        return;
+    }
+
+    // Atualiza no Supabase
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/Login?id=eq.${user.id}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`
+        },
+        body: JSON.stringify({
+            Nome: nome,
+            email: email,
+            ...(senha ? { senha: senha } : {}) // atualiza a senha somente se foi preenchida
+        })
+    });
+
+    if (response.ok) {
+        // Atualiza localStorage
+        const usuarioAtualizado = { ...user, Nome: nome, email: email };
+        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioAtualizado));
+        usuarioLogado = usuarioAtualizado;
+
+        showModal({
+            title: 'Perfil atualizado!',
+            body: '<p>Seus dados foram salvos com sucesso.</p>',
+            buttonText: 'OK',
+            buttonClass: 'btn-success'
+        });
+
+        // Fechar modal anterior
+        const modalEl = document.getElementById("modalRegistraDespesa");
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+
+    } else {
+        showModal({
+            title: 'Erro',
+            body: '<p>Não foi possível atualizar os dados.</p>',
+            buttonText: 'Voltar',
+            buttonClass: 'btn-danger'
+        });
+    }
+}
 
 async function Logar() {
     const emailEl = document.getElementById("loginEmail");
@@ -215,7 +319,14 @@ async function Logar() {
 
         // Alterar o link para "Perfil"
         const loginLink = document.getElementById("loginLink");
-        loginLink.innerHTML = '<i class="fa-solid fa-user"></i> Perfil';
+        loginLink.innerHTML = `
+    <i class="fa-solid fa-user" onclick="perfil()"></i>
+    <span onclick="perfil()">Perfil</span>
+    <span class="mx-2">|</span> 
+    <span style="cursor:pointer; color:red;" id="btnSair">Sair</span>
+`;
+
+document.getElementById("btnSair").onclick = logout;
         loginLink.removeAttribute("data-bs-toggle");
         loginLink.removeAttribute("data-bs-target");
         loginLink.href = "#"; // ou link para perfil
@@ -420,7 +531,7 @@ async function carregarProdutos() {
                     <h5 class="card-title">${produto.nome}</h5>
                     <p class="card-text">${produto.descricao}</p>
                     <p class="fw-bold text-success">R$ ${produto.valor}</p>
-                    <button class="btn btn-dark w-100">Comprar</button>
+                    <a href="produto.html?id=${produto.id}" class="btn btn-dark">Comprar</a>
                 </div>
             </div>
         </div>
@@ -444,8 +555,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (usuarioLogado) {
         
-        loginLink.innerHTML = '<i class="fa-solid fa-user"></i> Sair';
-        loginLink.onclick = logout;
+  loginLink.innerHTML = `
+    <i class="fa-solid fa-user"></i> Perfil 
+    <span class="mx-2">|</span> 
+    <span style="cursor:pointer; color:red;" id="btnSair">Sair</span>
+`;
+
+document.getElementById("btnSair").onclick = logout;
     }
     carregarProdutos();
 

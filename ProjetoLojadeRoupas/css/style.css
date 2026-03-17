@@ -10,9 +10,11 @@
 
     --font: 'Bebas';
 
-    --link-gray: #6e6e6e;
+    --link-gray: #4a4a4a;
+    --link-info: rgb(55, 110, 177);
 
     --links-hover-cinza-claro: rgb(71, 71, 71);
+    --link-hover-info: rgb(140, 183, 236);
 
 }
 
@@ -156,10 +158,18 @@ body {
 }
 .log{
     text-decoration: none;
-    color: var(--link-gray);
+    color: var(--black);
 }
-.log:hover{
-    color: var(--links-hover-cinza-claro);
+.log span{
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--link-info);
+}
+.log :hover{
+    color: var(--link-hover-info);
+}
+#user{
+    
 }
 /* Mobile refinado */
 @media(max-width:768px){
