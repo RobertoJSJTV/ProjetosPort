@@ -44,14 +44,14 @@ async function cadastroUsuario() {
         return;
     }
     if (!validarEmail(emailUsuario)) {
-    showModal({
-        title: 'Email inválido',
-        body: '<p>Digite um email válido (ex: nome@email.com).</p>',
-        buttonText: 'Corrigir',
-        buttonClass: 'btn-danger'
-    });
-    return;
-}
+        showModal({
+            title: 'Email inválido',
+            body: '<p>Digite um email válido (ex: nome@email.com).</p>',
+            buttonText: 'Corrigir',
+            buttonClass: 'btn-danger'
+        });
+        return;
+    }
 
     const response = await fetch(`${SUPABASE_URL}/rest/v1/Login`, {
         method: "POST",
@@ -90,14 +90,16 @@ async function cadastrarProduto() {
     const qtdEl = document.getElementById("Qtd");
     const valorEl = document.getElementById("valor");
     const imgURLEl = document.getElementById("imgURL");
+    const categoriaEl = document.getElementById("categoria");
 
     const nome = nomeEl.value;
     const descricao = descricaoEl.value;
     const qtd = qtdEl.value;
     const valor = valorEl.value;
     const imgURL = imgURLEl.value;
+    const categoria = categoriaEl.value
 
-    if (!nome || !descricao || !qtd || !valor) {
+    if (!nome || !descricao || !qtd || !valor || !categoria) {
         showModal({
             title: 'Erro ao gravar, verifique os dados informados',
             body: '<p>Existem campos obrigatórios não preenchidos.</p>',
@@ -120,7 +122,8 @@ async function cadastrarProduto() {
             descricao: descricao,
             qtd: qtd,
             valor: valor,
-            imgURL: imgURL
+            imgURL: imgURL,
+            categoria: categoria
         })
     });
 
@@ -140,6 +143,7 @@ async function cadastrarProduto() {
         qtdEl.value = "";
         valorEl.value = "";
         imgURLEl.value = "";
+        categoriaEl.value = "";
     } else {
         showModal({
             title: 'Erro ao cadastrar produto!',
@@ -162,7 +166,7 @@ function aplicarPermissoes() {
         inputs.forEach(input => input.disabled = true);
         if (btnCadastrar) btnCadastrar.disabled = true;
         if (tabela) tabela.style.display = "none";
-        if (nav) nav.style.display = "none"; 
+        if (nav) nav.style.display = "none";
         return;
     }
 
@@ -177,12 +181,12 @@ function aplicarPermissoes() {
         inputs.forEach(input => input.disabled = false);
         if (btnCadastrar) btnCadastrar.disabled = false;
         if (tabela) tabela.style.display = "table";
-        if (nav) nav.style.display = "inline-block"; 
-            
-        }
+        if (nav) nav.style.display = "inline-block";
+
+    }
 }
 
-function perfil(){
+function perfil() {
     const user = JSON.parse(localStorage.getItem("usuarioLogado"));
 
     const conteudo = `
@@ -202,7 +206,7 @@ function perfil(){
             </div>
         </form>
     `;
-        showModal({
+    showModal({
         title: 'Perfil do Usuário',
         body: conteudo,
         buttonText: 'Salvar',
@@ -326,12 +330,12 @@ async function Logar() {
     <span style="cursor:pointer; color:red;" id="btnSair">Sair</span>
 `;
 
-document.getElementById("btnSair").onclick = logout;
+        document.getElementById("btnSair").onclick = logout;
         loginLink.removeAttribute("data-bs-toggle");
         loginLink.removeAttribute("data-bs-target");
         loginLink.href = "#"; // ou link para perfil
 
-        
+
 
         aplicarPermissoes();
 
@@ -402,6 +406,7 @@ async function modificarProduto(id) {
         document.getElementById("editQtd").value = produto.qtd;
         document.getElementById("editValor").value = produto.valor;
         document.getElementById("editImgURL").value = produto.imgURL;
+        document.getElementById("editCategoria").value = produto.categoria;
 
         // Armazenar o ID para usar no salvar
         window.produtoId = id;
@@ -416,6 +421,7 @@ async function salvarProduto() {
     const qtd = document.getElementById("editQtd").value;
     const valor = document.getElementById("editValor").value;
     const imgURL = document.getElementById("editImgURL").value;
+    const categoria = document.getElementById("editCategoria").value;
 
     const response = await fetch(`${SUPABASE_URL}/rest/v1/Products?id=eq.${window.produtoId}`, {
         method: "PATCH",
@@ -429,7 +435,8 @@ async function salvarProduto() {
             descricao: descricao,
             qtd: qtd,
             valor: valor,
-            imgURL: imgURL
+            imgURL: imgURL,
+            categoria: categoria
         })
     });
 
@@ -518,10 +525,56 @@ async function carregarProdutos() {
     });
 
     const produtos = await response.json();
+    const min = Math.min(...produtos.map(p => p.qtd))
+
+    const calcados = produtos.filter(p => p.categoria === "calcado");
+    const camisas = produtos.filter(p => p.categoria === "camisetas");
+    const maisVendidos = produtos
+        .sort((a, b) => Number(a.qtd) - Number(b.qtd))
+        .slice(0, 4);
+    const calcas = produtos.filter(p => p.categoria === "calca");
+    const blusas = produtos.filter(p => p.categoria === "blusa")
+
 
     container.innerHTML = "";
 
-    produtos.forEach(produto => {
+    maisVendidos.forEach(produto => {
+        container.innerHTML += `
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="${produto.imgURL}" class="card-img-top" alt="${produto.nome}">
+                <div class="card-body">
+                    <h5 class="card-title">${produto.nome}</h5>
+                    <p class="card-text">${produto.descricao}</p>
+                    <p class="fw-bold text-success">R$ ${produto.valor}</p>
+                    <a href="produto.html?id=${produto.id}" class="btn btn-dark">Comprar</a>
+                </div>
+            </div>
+        </div>
+        `;
+    });
+    if (blusas.length > 0) {
+        container.innerHTML += `<h2 class="mt-3 mb-5 text-center">Blusas de Frio</h2>`;
+    }
+    blusas.forEach(produto => {
+        container.innerHTML += `
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="${produto.imgURL}" class="card-img-top" alt="${produto.nome}">
+                <div class="card-body">
+                    <h5 class="card-title">${produto.nome}</h5>
+                    <p class="card-text">${produto.descricao}</p>
+                    <p class="fw-bold text-success">R$ ${produto.valor}</p>
+                    <a href="produto.html?id=${produto.id}" class="btn btn-dark">Comprar</a>
+                </div>
+            </div>
+        </div>
+        `;
+    })
+    if (camisas.length > 0) {
+        container.innerHTML += `<h2 class="mt-3 mb-5 text-center">Camisetas</h2>`;
+    }
+    camisas.forEach(produto => {
 
         container.innerHTML += `
         <div class="col-md-3 mb-4">
@@ -536,6 +589,41 @@ async function carregarProdutos() {
             </div>
         </div>
         `;
+
+    });
+    if (calcas.length > 0) {
+        container.innerHTML += `<h2 class="mt-3 mb-5 text-center">Calça</h2>`;
+    }
+    calcas.forEach(produto => {
+        container.innerHTML += `
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="${produto.imgURL}" class="card-img-top" alt="${produto.nome}">
+                <div class="card-body">
+                    <h5 class="card-title">${produto.nome}</h5>
+                    <p class="card-text">${produto.descricao}</p>
+                    <p class="fw-bold text-success">R$ ${produto.valor}</p>
+                    <a href="produto.html?id=${produto.id}" class="btn btn-dark">Comprar</a>
+                </div>
+            </div>
+        </div>`
+    })
+    if (calcados.length > 0) {
+        container.innerHTML += `<h2 class="mt-3 mb-5 text-center">Calçados</h2>`;
+    }
+    calcados.forEach(produto => {
+        container.innerHTML += `
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="${produto.imgURL}" class="card-img-top" alt="${produto.nome}">
+                <div class="card-body">
+                    <h5 class="card-title">${produto.nome}</h5>
+                    <p class="card-text">${produto.descricao}</p>
+                    <p class="fw-bold text-success">R$ ${produto.valor}</p>
+                    <a href="produto.html?id=${produto.id}" class="btn btn-dark">Comprar</a>
+                </div>
+            </div>
+        </div>`
     });
 
 }
@@ -554,14 +642,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginLink = document.getElementById("loginLink");
 
     if (usuarioLogado) {
-        
-  loginLink.innerHTML = `
+
+        loginLink.innerHTML = `
     <i class="fa-solid fa-user"></i> Perfil 
     <span class="mx-2">|</span> 
     <span style="cursor:pointer; color:red;" id="btnSair">Sair</span>
 `;
 
-document.getElementById("btnSair").onclick = logout;
+        document.getElementById("btnSair").onclick = logout;
     }
     carregarProdutos();
 
