@@ -16,6 +16,7 @@
     --links-hover-cinza-claro: rgb(71, 71, 71);
     --link-hover-info: rgb(140, 183, 236);
 
+    --bg-gray: rgb(56, 56, 56);
 }
 
 * {
@@ -179,3 +180,4 @@ body {
         margin-top: 10px;
     }
 }
+
